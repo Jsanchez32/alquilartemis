@@ -5,6 +5,7 @@ import { methodsHTTP as constructoraController} from "../controllers/constructor
 const router = Router();
 
 router.get("/",constructoraController.getConstructora)
+router.post("/",constructoraController.addConstructora)
 
 
 export default router;

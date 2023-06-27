@@ -13,6 +13,18 @@ const getProducto = async (req,res)=>{
     }
 }
 
+
+
+const addProducto = async (req,res)=>{
+    const connection = await getConnection();
+    const {nombre_producto,precio_x_dia,stock_producto,categoria_producto}=req.body
+    const productos={
+        nombre_producto,precio_x_dia,stock_producto,categoria_producto
+    };
+    const result = await connection.query('INSERT INTO productos SET ?',productos);
+    res.json(result);
+}
 export const methodsHTTP ={
-    getProducto
+    getProducto,
+    addProducto
 }

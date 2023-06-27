@@ -9,6 +9,8 @@ const router = Router();
 
 //4.3.Se manda la respuesta//
 router.get("/", categoriaController.getCategoria);
+//8.2.Se manda la respuesta pero en formato post//
+router.post("/", categoriaController.addCategoria);
 
 //4.2.Lo exportamos para tenerlo global//
 export default router;

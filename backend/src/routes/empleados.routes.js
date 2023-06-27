@@ -3,6 +3,7 @@ import { methodsHTTP as empleadoController } from "../controllers/empleado.contr
 
 const router = Router();
 
-router.get("/",empleadoController.getEmpleado)
+router.get("/",empleadoController.getEmpleado);
+router.post("/",empleadoController.addEmpleado);
 
 export default router;

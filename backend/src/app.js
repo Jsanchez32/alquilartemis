@@ -11,6 +11,10 @@ const app = express();
 //2.3.Declaramos el puerto//
 app.set("port",5000);
 
+//9.Nos permite recibir la respuesta, para entender json//
+//Middleware//
+app.use(express.json());
+
 //Routes//
 
 app.use("/api/categorias",categoriaRoutes);
