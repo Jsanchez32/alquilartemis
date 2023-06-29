@@ -4,8 +4,11 @@ import { methodsHTTP as constructoraController} from "../controllers/constructor
 
 const router = Router();
 
-router.get("/",constructoraController.getConstructora)
-router.post("/",constructoraController.addConstructora)
+router.get("/",constructoraController.getConstructora);
+router.post("/",constructoraController.addConstructora);
+router.get("/:id",constructoraController.getIdConstructora);
+router.put("/:id",constructoraController.updateConstructora);
+router.delete("/:id",constructoraController.deleteConstructora);
 
 
 export default router;

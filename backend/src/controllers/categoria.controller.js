@@ -31,9 +31,55 @@ const addCategoria = async (req,res)=>{
     }
 }
 
+const getIdCategoria = async (req,res)=>{
+    try {
+        const connection = await getConnection();
+        const {id}= req.params;
+        const result = await connection.query("SELECT * FROM categorias WHERE id_categoria=?",id);
+        console.log(result);
+        res.json(result);
+    } catch (error) {
+        res.status(500);
+        res.send(error.message);
+    }
+
+}
+
+const deleteCategoria = async (req,res)=>{
+    try {
+        const connection = await getConnection();
+        const {id}= req.params;
+        const result = await connection.query("DELETE FROM categorias WHERE id_categoria=?",id);
+        console.log(result);
+        res.json(result);
+    } catch (error) {
+        res.status(500);
+        res.send(error.message);
+    }
+
+}
+
+const updateCategoria = async (req,res)=>{
+    try {
+        const connection = await getConnection();
+        //10.Aplicamos Destructuring con los nombres de las tablas en la base de datos//
+        const{nombre_categoria,descripcion_categoria,img_categoria}=req.body;
+        const {id}= req.params;
+        const category={nombre_categoria,descripcion_categoria,img_categoria}
+        const result = await connection.query('UPDATE categorias SET ? WHERE id_categoria=?',[category,id])
+        res.json(result);
+    } catch (error) {
+        res.status(500);
+        res.send(error.message);
+    }
+}
+
 //5.1.Se encarga de mandar la respuesta//
 //5.1.1. y se exportan para hacerlos globales//
 export const methodsHTTP = {
     getCategoria,
-    addCategoria
+    addCategoria,
+    getIdCategoria,
+    deleteCategoria,
+    updateCategoria
 }

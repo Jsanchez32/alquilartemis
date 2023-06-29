@@ -29,7 +29,54 @@ const addEmpleado = async(req,res)=>{
     }
 }
 
+
+const getIdEmpleado = async (req,res)=>{
+    try {
+        const connection = await getConnection();
+        const {id} = req.params;
+        const result = await connection.query("SELECT * FROM empleados WHERE id_empleado=?",id);
+        res.json(result);
+    } catch (error) {
+        res.status(500);
+        res.send(error.message);
+    }
+}
+
+const deleteEmpleado = async (req,res)=>{
+    try {
+        const connection = await getConnection();
+        const {id} = req.params;
+        const result = connection.query("DELETE FROM empleados WHERE id_empleado=?",id);
+        res.json(result);
+    } catch (error) {
+        res.status(500);
+        res.send(error.message);
+    }
+}
+
+const updateEmpleado = async (req,res)=>{
+    try {
+        const connection = await getConnection();
+        const {id}=req.params;
+        const {nombre_empleado,email_empleado,celular_empleado,password_empleado}=req.body
+        const requery={
+            nombre_empleado,
+            email_empleado,
+            celular_empleado,
+            password_empleado
+        }
+        const result = connection.query('UPDATE empleados SET ? WHERE id_empleado=?',[requery,id])
+        res.json(result);
+    } catch (error) {
+        res.status(500);
+        res.send(error.message);
+    }
+}
+
 export const methodsHTTP ={
     getEmpleado,
-    addEmpleado
+    addEmpleado,
+    getIdEmpleado,
+    deleteEmpleado,
+    updateEmpleado
 }
