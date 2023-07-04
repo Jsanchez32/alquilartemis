@@ -1,5 +1,6 @@
 //2.Importamos el framework express//
 import express from "express";
+import cors from "cors";
 //Importamos donde manejaremos la rutas de categoria//
 import categoriaRoutes from "./routes/categorias.routes.js";
 import constructoraRoutes from "./routes/constructoras.routes.js";
@@ -14,8 +15,16 @@ app.set("port",5000);
 //9.Nos permite recibir la respuesta, para entender json//
 //Middleware//
 app.use(express.json());
+const configcors = {
+    methods: ['GET','POST','PUT','DELETE']
+}
+app.use(cors(configcors));
+
+
+
 
 //Routes//
+
 
 app.use("/api/categorias",categoriaRoutes);
 app.use("/api/constructoras",constructoraRoutes);

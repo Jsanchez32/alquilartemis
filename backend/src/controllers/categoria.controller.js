@@ -21,8 +21,8 @@ const addCategoria = async (req,res)=>{
     try {
         const connection = await getConnection();
         //10.Aplicamos Destructuring con los nombres de las tablas en la base de datos//
-        const{nombre_categoria,descripcion_categoria,img_categoria}=req.body;
-        const category={nombre_categoria,descripcion_categoria,img_categoria}
+        const{CategoriaNombre,Descripcion,Imagen}=req.body;
+        const category={CategoriaNombre,Descripcion,Imagen}
         const result = await connection.query('INSERT INTO categorias SET ?',category)
         res.json(result);
     } catch (error) {
@@ -35,7 +35,7 @@ const getIdCategoria = async (req,res)=>{
     try {
         const connection = await getConnection();
         const {id}= req.params;
-        const result = await connection.query("SELECT * FROM categorias WHERE id_categoria=?",id);
+        const result = await connection.query("SELECT * FROM categorias WHERE CategoriaID=?",id);
         console.log(result);
         res.json(result);
     } catch (error) {
@@ -49,7 +49,7 @@ const deleteCategoria = async (req,res)=>{
     try {
         const connection = await getConnection();
         const {id}= req.params;
-        const result = await connection.query("DELETE FROM categorias WHERE id_categoria=?",id);
+        const result = await connection.query("DELETE FROM categorias WHERE CategoriaID=?",id);
         console.log(result);
         res.json(result);
     } catch (error) {
