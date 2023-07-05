@@ -46,7 +46,7 @@
         data-bs-target="#modalCategoria"
         data-bs-whatever="@getbootstrap"
       >
-        Agregar Categoria
+        Agregar Producto
       </button>
       
     </center>
@@ -61,7 +61,7 @@
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header bg-primary text-white">
-            <h2 class="modal-title" id="exampleModalLabel">Nueva Categoria</h2>
+            <h2 class="modal-title" id="exampleModalLabel">Nuevo Producto</h2>
             <button
               type="button"
               class="btn-close"
@@ -73,18 +73,45 @@
             <form id="formulario" class="form-select-lg mb-3" method="POST">
            
               <div class="mb-3">
-                <label for="CategoriaNombre" class="col-form-label">Categoria Nombre:</label>
-                <input type="text" class="form-control formTam" id="CategoriaNombre" />
+                <label for="ProductoNombre" class="col-form-label">Producto Nombre:</label>
+                <input type="text" class="form-control formTam" id="ProductoNombre" />
               </div>
              
               <div class="mb-3">
-                <label for="Descripcion" class="col-form-label">Descripcion:</label>
-                <input type="text" class="form-control formTam" id="Descripcion" />
+                <label for="Descripcion" class="col-form-label">Proveedor:</label>
+                <select name="ProveedorID" id="ProveedorID" class="form-select"></select>
               </div>
 
               <div class="mb-3">
-                <label for="Imagen" class="col-form-label">Imagen:</label>
-                <input type="text" class="form-control formTam" id="Imagen" />
+                <label for="Imagen" class="col-form-label">Categoria:</label>
+                <select name="CategoriaID" id="CategoriaID" class="form-select"></select>
+              </div>
+              <div class="mb-3">
+                <label for="CantidadPorUnidad" class="col-form-label">Cantidad Unidad:</label>
+                <input type="text" class="form-control formTam" id="CantidadPorUnidad" />
+              </div>
+              <div class="mb-3">
+                <label for="PrecioUnitario" class="col-form-label">Precio Unitario:</label>
+                <input type="text" class="form-control formTam" id="PrecioUnitario" />
+              </div>
+              <div class="mb-3">
+                <label for="UnidadesStock" class="col-form-label">Unidades Stock:</label>
+                <input type="text" class="form-control formTam" id="UnidadesStock" />
+              </div>
+              <div class="mb-3">
+                <label for="UnidadesPedidas" class="col-form-label">Unidades Pedidas:</label>
+                <input type="text" class="form-control formTam" id="UnidadesPedidas" />
+              </div>
+              <div class="mb-3">
+                <label for="NivelReorden" class="col-form-label">Nivel Orden:</label>
+                <input type="text" class="form-control formTam" id="NivelReorden" />
+              </div>
+              <div class="mb-3">
+                <label for="UnidadesStock" class="col-form-label">Discontinuado:</label>
+                <select name="Discontinuado" id="Discontinuado" class="form-select">
+                  <option value="Si">Si</option>
+                  <option value="No">No</option>
+                </select>
               </div>
           </div>
           <div class="modal-footer">
