@@ -63,10 +63,10 @@ const updateCategoria = async (req,res)=>{
     try {
         const connection = await getConnection();
         //10.Aplicamos Destructuring con los nombres de las tablas en la base de datos//
-        const{nombre_categoria,descripcion_categoria,img_categoria}=req.body;
+        const{CategoriaNombre,Descripcion,Imagen}=req.body;
         const {id}= req.params;
-        const category={nombre_categoria,descripcion_categoria,img_categoria}
-        const result = await connection.query('UPDATE categorias SET ? WHERE id_categoria=?',[category,id])
+        const category={CategoriaNombre,Descripcion,Imagen}
+        const result = await connection.query('UPDATE categorias SET ? WHERE CategoriaID=?',[category,id])
         res.json(result);
     } catch (error) {
         res.status(500);

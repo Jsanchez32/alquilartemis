@@ -33,12 +33,25 @@ export const deleteCategoria = async (id)=>{
     }
 }
 
-export const updateCategoria = async (id)=>{
+export const updateCategoria = async (actualizar,id)=>{
     try {
-      await fetch(`${url}/${id}`,{
-        method: 'PUT'
-    });
+        await fetch(`${url}/${id}`,{
+            method:'put',
+            body:JSON.stringify(actualizar),
+            headers:{'Content-Type':'application/json'}
+        })
+
     } catch (error) {
-      console.log(error);
+        console.log(error);
+    }
+}
+
+  export const selectId = async (id)=>{
+    try {
+        const categoria = await fetch(`${url}/${id}`);
+        const response = await categoria.json();
+        return response;
+    } catch (error) {
+        console.log(error);
     }
   }

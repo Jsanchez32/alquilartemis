@@ -2,13 +2,12 @@ import {
  verCaregoria,
  insertCategoria,
  deleteCategoria,
+ selectId,
  updateCategoria
-
 } from "./API.js";
 
 document.addEventListener("DOMContentLoaded", () => {
-    mostrar(),
-    editCliente()
+    mostrar()
 });
 
 /* LISTAR CATEGORIAS  - CRUD (R) */
@@ -24,9 +23,9 @@ async function mostrar(){
                 <td>${Descripcion}</td>
                 <td>${Imagen}</td>
                 <td><button type="submit" class="eliminar btn btn-danger" id=${CategoriaID}>Eliminar</button></td>
-                <td><button type="submit" class="btn btn-warning" data-bs-toggle="modal"
+                <td><button type="submit" idUpdate=${CategoriaID} class="update btn btn-warning" data-bs-toggle="modal"
                 data-bs-target="#updateCategory"
-                data-bs-whatever="@getbootstrap" idUpdate=${CategoriaID}>Editar</button></td>
+                data-bs-whatever="@getbootstrap">Editar</button></td>
                 <td><button class="btn btn-primary">Detalles</button></td>
             </tr>
         `
@@ -47,6 +46,7 @@ async function insertar(e){
         Descripcion,
         Imagen
     }
+    console.log(datos);
 
     return insertCategoria(datos);
 }
@@ -63,25 +63,47 @@ async function borrar(e){
 }
 
 
-//EDITAR CATEGORIA - CRUD (U)
+//SELECT ID
 
-const edit_nombre = document.querySelector("#CategoriaNombreUpdate");
-const edit_descripcion = document.querySelector("#DescripcionUpdate");
-const edit_imagen = document.querySelector("#ImagenUpdate");
+body.addEventListener('click',mostrarId)
 
-const formularioEdit=document.querySelector('#formularioUpdate')
-formularioEdit.addEventListener('submit',editCliente)
+async function mostrarId(e){
+    if(e.target.classList.contains('update'));
+    const CategoriaID = e.target.getAttribute('idUpdate');
+    const datos = await selectId(CategoriaID);
+    datos.forEach((dato)=>{
+        const {CategoriaID,CategoriaNombre,Descripcion,Imagen}=dato;
 
-async function editCliente(e) {
-      e.preventDefault();
-      const CategoriaID = e.target.getAttribute('idUpdate');
-      const dataJson = {
-        CategoriaID: CategoriaID,
-        CategoriaNombre: edit_nombre.value,
-        Descripcion: edit_descripcion.value,
-        Imagen: edit_imagen.value,
-      };
-      updateCategoria(CategoriaID);
+        const nombre =document.querySelector('#CategoriaNombreUpdate');
+        const descripcion = document.querySelector('#DescripcionUpdate');
+        const imagen = document.querySelector('#ImagenUpdate');
+        const id = document.querySelector('#idUpdate');
+
+        nombre.value=CategoriaNombre;
+        descripcion.value=Descripcion;
+        imagen.value=Imagen;
+        id.value=CategoriaID
+    })
 }
 
 
+
+//EDITAR CATEGORIA - CRUD (U)
+
+const formularioUpdate = document.querySelector('#formularioUpdate');
+formularioUpdate.addEventListener('submit',update);
+async function update(e){
+    e.preventDefault();
+    const id =document.querySelector('#idUpdate').value;
+    const CategoriaNombre =document.querySelector('#CategoriaNombreUpdate').value;
+    const Descripcion = document.querySelector('#DescripcionUpdate').value;
+    const Imagen = document.querySelector('#ImagenUpdate').value;
+
+    const datos = {
+        CategoriaNombre,
+        Descripcion,
+        Imagen
+    }
+    console.log(datos,id);
+    return updateCategoria(datos,id)
+}
